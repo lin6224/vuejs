@@ -1,0 +1,73 @@
+<!Doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>VueJS</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+
+
+<div id ="app">
+<p>{{ 10 > 1 ? 'answer 10 > 1 ' : 'answer 10 < 1'}}</p>
+<!-- click event bind the increate function -->
+<button v-on:click="increase(2)">Clike me</button>
+<!-- v-once only display the orign data -->
+<p v-once>{{counter}}</p>
+<p>{{counter}}</p>
+<p>{{othercounter}}</p>
+<!-- mousemove event bind the function-->
+<p v-on:mousemove="updateCorrdinates">Coordinates: {{x}} / {{y}}
+-<span v-on:mousemove="dummp">Dead Spot</span>
+<!-- 
+	other way to stop the event
+	-<span v-on:mousemove.stop="">Dead Spot</span>
+-->
+</p>
+<!-- 
+	keyboard enter event bind
+	keyup.enter.space
+	keyup
+	keyup.enter
+-->
+<input type="text" v-on:keyup.enter.space="alertMe">
+<br/>
+<input type="text" v-on:keydown="value = $event.target.value">
+<p>{{ value}}</p>
+<input type="text" v-on:keydown.enter="value = $event.target.value">
+<p>{{ value}}</p>
+</div>
+
+
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			counter : 0,
+			othercounter : 0,
+			x : 0,
+			y : 0,
+			value : ""
+		},
+		methods:{
+			increase : function(step){
+				this.othercounter += step;
+				this.counter++;
+			},
+			updateCorrdinates : function(event){
+				// set and display the mouse position in the page
+				this.x = event.clientX;
+				this.y = event.clientY;
+			},
+			dummp : function(event){
+				event.stopPropagation();
+			},
+			alertMe : function(){
+				alert("Alter!");
+			}
+		}
+	})
+</script>
+
+
+</body>
+</html>

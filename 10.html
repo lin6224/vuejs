@@ -1,0 +1,62 @@
+<!Doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>VueJS</title>
+	<script src="vue.js"></script>
+	<style type="text/css">
+		.demo{
+			width:100px;
+			height: 100px;
+			background-color: gray;
+			display: inline-block;
+			margin: 10px;
+		}
+		.red{
+			background-color: red;
+		}
+		.green{
+			background-color: green;
+		}
+		.blue{
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+<div id ="app">
+	<!-- 
+	attachRed = !attachRed  true turn to false, or false turn to true 
+	if the red is true, will add the .red class in the element
+	-->
+	<div class="demo" v-on:click="attachRed = !attachRed" v-bind:class="divClasses"></div>
+	<div class="demo" v-bind:class="{red : attachRed}"></div>
+	<!-- 
+	dynamic styling with css classes using class
+	-->
+	<div class="demo" v-bind:class="color"></div>
+	<!--
+	dynamic styling with css classes using name
+	<div class="demo" v-bind:class="[color, { red : attachRed }]"></div>
+	-->
+	<hr>
+	<input type="text" v-model="color">
+</div>
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			attachRed : false,
+			color : "green"
+		},
+		computed:{
+			divClasses:function(){
+				return {
+					red:this.attachRed,
+					blue:!this.attachRed
+				};
+			}
+		}
+	})
+</script>
+</body>
+</html>

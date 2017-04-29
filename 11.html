@@ -1,0 +1,47 @@
+<!Doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>VueJS</title>
+	<script src="vue.js"></script>
+	<style type="text/css">
+		.demo{
+			width:100px;
+			height: 100px;
+			background-color: gray;
+			display: inline-block;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+<div id ="app">
+	<!-- 
+	setting styles dynamically without css classes
+	-->
+	<div class="demo"  v-bind:style="{backgroundColor:color}"></div>
+	<div class="demo"  v-bind:style="{width:width}"></div>
+	<div class="demo"  v-bind:style="myStryle"></div>
+	<hr>
+	<input type="text" v-model="color">
+	<input type="text" v-model="width">
+</div>
+
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			color:'green',
+			width :50
+		},
+		computed:{
+			myStryle : function(){
+				return {
+					backgroundColor:this.color,
+					width:this.width + 'px'
+				};
+			}
+		}
+	})
+</script>
+</body>
+</html>

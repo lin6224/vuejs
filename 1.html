@@ -1,0 +1,48 @@
+<!Doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>VueJS</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id ="app">
+	<!--
+		input is a event in the vue, if we enter anything 
+		it will run changTitle function
+		binding the input event
+	-->
+	<input type="text" v-on:input="changTitle">
+	<p>{{ inputTitle }}</p>
+	<!-- {{}} called interpolation or string interpolation -->
+	<!-- v-once will display orign data from vue data -->
+	<!-- v-once other way do display once like {{ *title}} -->
+	<p v-once>{{ title }}</p>
+	<!-- v-bind will took data from instance vue -->
+	<p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+	<p v-html="finishedLink"></p>
+</div>
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			inputTitle : "",
+			title : "Hello World!",
+			link : "http://google.com",
+			finishedLink : "<a href='//google.com'>Google</a>"
+		},
+		methods:{
+			changTitle : function(){
+				this.inputTitle = event.target.value;
+				// event.target.value
+				// it will reflect to input event and took value in the input value
+			},
+			sayHello : function(){
+				//return "this is v-bind to google website";
+				this.title = "Hello!"
+				return this.title;
+			},
+		}
+	})
+</script>
+</body>
+</html>
